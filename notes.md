@@ -16,6 +16,7 @@
 
 
 
+
 ## Development
 
 
@@ -23,6 +24,18 @@
 | Flutter                                                      | Angular |
 | ------------------------------------------------------------ | ------- |
 | Easy switch between end devices (browser, Android/IOS Emulators,...) in the VS Code IDE possible |         |
+| CLI:                                                         |         |
 | During runtime, hot reloads of code changes are supported -> Great developer experience, Time saving, Supports experimental coding (high learning curve) |         |
 | Works with an easy to understand Widget structure            |         |
 
+
+
+## Debugging/Performance
+
+
+
+| Flutter                                                      | Angular |
+| ------------------------------------------------------------ | ------- |
+| Flutter DevTools: Application Inspection, Performance View, CPU Profiler View, Memory View, Debbuger View, Network View, Logging View, App Size Tool |         |
+| Provides a performance overlay in the application            |         |
+| [Flutter vs Native vs React-Native: Examining Performance (inveritasoft.com)](https://inveritasoft.com/blog/flutter-vs-native-vs-react-native-examining-performance) |         |

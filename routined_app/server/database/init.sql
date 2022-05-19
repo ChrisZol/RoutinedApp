@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS user_accounts (
 CREATE TABLE IF NOT EXISTS routines (
     id INTEGER PRIMARY KEY,
     name TEXT NOT NULL,
+    occurence TEXT CHECK(occurence IN('Daily', 'Weekly', 'Monthly', 'Yearly')) NOT NULL,
     start_time NOT NULL,
     end_time NOT NULL
 );

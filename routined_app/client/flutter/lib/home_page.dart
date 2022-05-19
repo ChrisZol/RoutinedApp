@@ -16,13 +16,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late final String date;
+  late final String shownDate;
+  late DateTime currentDate;
   final currentRoutines = <Routine>[];
 
   _HomePageState(){
-    DateTime now = DateTime.now();
+    currentDate = DateTime.now();
     DateFormat format = DateFormat('MMMMEEEEd');
-    date = format.format(now);
+    shownDate = format.format(currentDate);
   }
 
   void _pushRoutineOverviewPage(){
@@ -37,6 +38,35 @@ class _HomePageState extends State<HomePage> {
       MaterialPageRoute(builder: (BuildContext context) {
         return RoutinePage(routine: routine);
       }));
+  }
+
+  Widget _buildTodaysRoutineList() => 
+    ListView.builder(
+      itemCount: 5,
+      itemBuilder: (context, index) {
+        var rng = Random();
+        final taskLength = rng.nextInt(15);
+        var tasks = <Task>[];
+
+        for (int i = 0; i < taskLength; i++) {
+          tasks.add(Task('Task ${i + 1}', 'desc', rng.nextInt(200)));
+        }
+
+        var routineTest = Routine("Routine ${index + 1}", 
+                                  TimeOfDay(hour: rng.nextInt(24), minute: rng.nextInt(59)), 
+                                  TimeOfDay(hour: rng.nextInt(24), minute: rng.nextInt(59)), 
+                                  tasks);
+        return ListTile(subtitle: Text(routineTest.startTime.format(context)), 
+                        title: Text(routineTest.name),
+                        onTap: () => _pushRoutinePage(routineTest),);
+      },
+    );
+
+  void _buttonPress()
+  { 
+    currentDate.add(const Duration(days: 1));
+    DateFormat format = DateFormat('MMMMEEEEd');
+    shownDate = format.format(currentDate);
   }
 
   @override
@@ -66,30 +96,21 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              date,
-              style: Theme.of(context).textTheme.headline4,
+            Container(
+              margin: const EdgeInsets.all(20.0),
+              child: Row(
+                children: [
+                  IconButton(onPressed: _buttonPress, icon: const Icon(Icons.arrow_left),),
+                  Text(
+                    shownDate,
+                    style: Theme.of(context).textTheme.headline4,
+                  ),
+                  IconButton(onPressed: _buttonPress, icon: const Icon(Icons.arrow_right),),
+                ],
+              ),
             ),
             Expanded(
-              child: ListView.builder(
-                itemCount: 5,
-                itemBuilder: (context, index) {
-                  var rng = Random();
-                  final taskLength = rng.nextInt(15);
-                  var tasks = <Task>[];
-
-                  for (int i = 0; i < taskLength; i++) {
-                    tasks.add(Task('Task ${i + 1}', 'desc', rng.nextInt(200)));
-                  }
-
-                  var routineTest = Routine("Routine ${index + 1}", 
-                                            TimeOfDay(hour: rng.nextInt(24), minute: rng.nextInt(59)), 
-                                            tasks);
-                  return ListTile(subtitle: Text(routineTest.startTime.format(context)), 
-                                  title: Text(routineTest.name),
-                                  onTap: () => _pushRoutinePage(routineTest),);
-                },
-              ),
+              child: _buildTodaysRoutineList()
             ),
           ],
         ),

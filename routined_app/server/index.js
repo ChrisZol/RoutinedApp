@@ -1,7 +1,10 @@
 import express from 'express';
-import sqlite3  from 'sqlite3';
+import * as db from './database/db.js';
 
 const app = express();
+
+db.connectDB();
+db.initDB();
 
 // Starting the server
 app.listen(3000, () => {
