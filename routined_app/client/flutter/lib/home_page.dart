@@ -1,10 +1,7 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:routined_app/routines_overview_page.dart';
 import 'routine_management/routine_management.dart';
-import './routine_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.title}) : super(key: key);
@@ -26,20 +23,6 @@ class _HomePageState extends State<HomePage> {
     shownDate = format.format(currentDate);
   }
 
-  void _pushRoutineOverviewPage(){
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (BuildContext context) {
-        return const RoutinesOverviewPage();
-      }));
-  }
-
-  void _pushRoutinePage(Routine routine){
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (BuildContext context) {
-        return RoutinePage(routine: routine);
-      }));
-  }
-
   Widget _buildTodaysRoutineList() => 
     ListView.builder(
       itemCount: 5,
@@ -49,16 +32,16 @@ class _HomePageState extends State<HomePage> {
         var tasks = <Task>[];
 
         for (int i = 0; i < taskLength; i++) {
-          tasks.add(Task('Task ${i + 1}', 'desc', rng.nextInt(200)));
+          tasks.add(Task(i, 'Task ${i + 1}', 'desc', rng.nextInt(200)));
         }
 
-        var routineTest = Routine("Routine ${index + 1}", 
+        var routineTest = Routine(index, "Routine ${index + 1}", 
                                   TimeOfDay(hour: rng.nextInt(24), minute: rng.nextInt(59)), 
                                   TimeOfDay(hour: rng.nextInt(24), minute: rng.nextInt(59)), 
                                   tasks);
         return ListTile(subtitle: Text(routineTest.startTime.format(context)), 
                         title: Text(routineTest.name),
-                        onTap: () => _pushRoutinePage(routineTest),);
+                        onTap: () => Navigator.pushNamed(context, '/routine/:${routineTest.id}'),);
       },
     );
 
@@ -87,7 +70,7 @@ class _HomePageState extends State<HomePage> {
             const DrawerHeader(child: Text('Welcome!')),
             ListTile(
               title: const Text('My Routines'),
-              onTap: _pushRoutineOverviewPage,
+              onTap: () => Navigator.pushNamed(context, '/routines'),
             )
           ],
         ),

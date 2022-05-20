@@ -1,8 +1,5 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:routined_app/routine_page.dart';
-
 import 'routine_management/routine_management.dart';
 
 class RoutinesOverviewPage extends StatefulWidget{
@@ -14,13 +11,6 @@ class RoutinesOverviewPage extends StatefulWidget{
 }
 
 class _RoutinesOverviewPageState extends State<RoutinesOverviewPage>{
-    void _pushRoutinePage(Routine routine){
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (BuildContext context) {
-        return RoutinePage(routine: routine);
-      }));
-  }
-
   Widget _buildRoutineList() => 
     ListView.builder(
       itemCount: 5,
@@ -43,16 +33,16 @@ class _RoutinesOverviewPageState extends State<RoutinesOverviewPage>{
         var tasks = <Task>[];
 
         for (int i = 0; i < taskLength; i++) {
-          tasks.add(Task('Task ${i + 1}', 'desc', rng.nextInt(200)));
+          tasks.add(Task(i, 'Task ${i + 1}', 'desc', rng.nextInt(200)));
         }
 
-        var routineTest = Routine("Routine ${index + 1}", 
+        var routineTest = Routine(index, "Routine ${index + 1}", 
                                   TimeOfDay(hour: rng.nextInt(24), minute: rng.nextInt(59)), 
                                   TimeOfDay(hour: rng.nextInt(24), minute: rng.nextInt(59)), 
                                   tasks);
         return ListTile(subtitle: Text(routineTest.startTime.format(context)), 
                         title: Text(routineTest.name),
-                        onTap: () => _pushRoutinePage(routineTest),);
+                        onTap: () => Navigator.pushNamed(context, '/routine/:${routineTest.id}'),);
     }
 
   @override

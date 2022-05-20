@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:routined_app/routine_page.dart';
 import 'package:routined_app/routines_overview_page.dart';
+import 'package:routined_app/task_page.dart';
 import './home_page.dart';
 
 void main() {
@@ -18,7 +20,9 @@ class MyApp extends StatelessWidget {
       ),
       home: const HomePage(title: 'Routined'),
       routes: <String, WidgetBuilder>{
-        '/routines': (BuildContext context) => const RoutinesOverviewPage()
+        '/routines': (BuildContext context) => const RoutinesOverviewPage(),
+        '/routine/:id':(context) => const RoutinePage(),
+        '/task/:id' : (context) => const TaskPage()
       },
     );
   }
