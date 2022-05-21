@@ -1,10 +1,8 @@
-import express from 'express';
+import app from './routes/posts.js';
 import * as db from './database/db.js';
 
-const app = express();
-
 db.connectDB();
-db.initDB();
+// db.initDB();
 
 // Starting the server
 app.listen(3000, () => {

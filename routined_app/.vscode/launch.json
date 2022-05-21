@@ -1,0 +1,31 @@
+{
+    // Verwendet IntelliSense zum Ermitteln möglicher Attribute.
+    // Zeigen Sie auf vorhandene Attribute, um die zugehörigen Beschreibungen anzuzeigen.
+    // Weitere Informationen finden Sie unter https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "flutter",
+            "cwd": "client\\flutter",
+            "request": "launch",
+            "type": "dart",
+            "args": ["-d", "chrome","--web-port", "3000"],
+        },
+        {
+            "name": "flutter (profile mode)",
+            "cwd": "client\\flutter",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile",
+            "args": ["-d", "chrome","--web-port", "3000"],
+        },
+        {
+            "name": "flutter (release mode)",
+            "cwd": "client\\flutter",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release",
+            "args": ["-d", "chrome","--web-port", "3000"],
+        }
+    ]
+}

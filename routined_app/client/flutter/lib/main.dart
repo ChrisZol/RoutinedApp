@@ -18,11 +18,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),
-      home: const HomePage(title: 'Routined'),
+      initialRoute: '/',
       routes: <String, WidgetBuilder>{
+        '/' : (context) => const HomePage(title: 'Routined'),
         '/routines': (BuildContext context) => const RoutinesOverviewPage(),
-        '/routine/:id':(context) => const RoutinePage(),
-        '/task/:id' : (context) => const TaskPage()
+        '/routine':(context) => const RoutinePage(),
+        '/task' : (context) => const TaskPage()
       },
     );
   }

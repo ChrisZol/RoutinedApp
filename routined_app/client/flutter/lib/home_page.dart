@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'routine_management/routine_management.dart';
+import 'routine_management/routine_data.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.title}) : super(key: key);
@@ -17,36 +17,45 @@ class _HomePageState extends State<HomePage> {
   late DateTime currentDate;
   final currentRoutines = <Routine>[];
 
-  _HomePageState(){
+  _HomePageState() {
     currentDate = DateTime.now();
     DateFormat format = DateFormat('MMMMEEEEd');
     shownDate = format.format(currentDate);
   }
 
-  Widget _buildTodaysRoutineList() => 
-    ListView.builder(
-      itemCount: 5,
-      itemBuilder: (context, index) {
-        var rng = Random();
-        final taskLength = rng.nextInt(15);
-        var tasks = <Task>[];
+  Widget _buildTodaysRoutineList() => ListView.builder(
+        itemCount: 5,
+        itemBuilder: (context, index) {
+          var rng = Random();
+          final taskLength = rng.nextInt(15);
+          var tasks = <Task>[];
 
-        for (int i = 0; i < taskLength; i++) {
-          tasks.add(Task(i, 'Task ${i + 1}', 'desc', rng.nextInt(200)));
-        }
+          for (int i = 0; i < taskLength; i++) {
+            tasks.add(Task(
+                id: i,
+                name: 'Task ${i + 1}',
+                description: 'desc',
+                duration: rng.nextInt(200)));
+          }
 
-        var routineTest = Routine(index, "Routine ${index + 1}", 
-                                  TimeOfDay(hour: rng.nextInt(24), minute: rng.nextInt(59)), 
-                                  TimeOfDay(hour: rng.nextInt(24), minute: rng.nextInt(59)), 
-                                  tasks);
-        return ListTile(subtitle: Text(routineTest.startTime.format(context)), 
-                        title: Text(routineTest.name),
-                        onTap: () => Navigator.pushNamed(context, '/routine/:${routineTest.id}'),);
-      },
-    );
+          var routineTest = Routine(
+              id: index,
+              name: "Routine ${index + 1}",
+              startTime:
+                  TimeOfDay(hour: rng.nextInt(24), minute: rng.nextInt(59)),
+              endTime:
+                  TimeOfDay(hour: rng.nextInt(24), minute: rng.nextInt(59)),
+              tasks: tasks);
+          return ListTile(
+            subtitle: Text(routineTest.startTime.format(context)),
+            title: Text(routineTest.name),
+            onTap: () =>
+                Navigator.pushNamed(context, '/routine/:${routineTest.id}'),
+          );
+        },
+      );
 
-  void _buttonPress()
-  { 
+  void _buttonPress() {
     currentDate.add(const Duration(days: 1));
     DateFormat format = DateFormat('MMMMEEEEd');
     shownDate = format.format(currentDate);
@@ -66,7 +75,7 @@ class _HomePageState extends State<HomePage> {
       ),
       drawer: Drawer(
         child: ListView(
-          children: <Widget> [
+          children: <Widget>[
             const DrawerHeader(child: Text('Welcome!')),
             ListTile(
               title: const Text('My Routines'),
@@ -74,7 +83,7 @@ class _HomePageState extends State<HomePage> {
             )
           ],
         ),
-        ),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -83,18 +92,22 @@ class _HomePageState extends State<HomePage> {
               margin: const EdgeInsets.all(20.0),
               child: Row(
                 children: [
-                  IconButton(onPressed: _buttonPress, icon: const Icon(Icons.arrow_left),),
+                  IconButton(
+                    onPressed: _buttonPress,
+                    icon: const Icon(Icons.arrow_left),
+                  ),
                   Text(
                     shownDate,
                     style: Theme.of(context).textTheme.headline4,
                   ),
-                  IconButton(onPressed: _buttonPress, icon: const Icon(Icons.arrow_right),),
+                  IconButton(
+                    onPressed: _buttonPress,
+                    icon: const Icon(Icons.arrow_right),
+                  ),
                 ],
               ),
             ),
-            Expanded(
-              child: _buildTodaysRoutineList()
-            ),
+            Expanded(child: _buildTodaysRoutineList()),
           ],
         ),
       ),
