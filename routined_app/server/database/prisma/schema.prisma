@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:../routined_db.db"
+}
+
+model routines {
+  routine_id    Int             @id @default(autoincrement())
+  name          String
+  occurence     String
+  start_time    Unsupported("")
+  end_time      Unsupported("")
+  user_id       Int
+  user_accounts user_accounts   @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
+  tasks         tasks[]
+}
+
+model tasks {
+  task_id     Int      @id @default(autoincrement())
+  name        String
+  duration    Int
+  description String
+  routine_id  Int
+  routines    routines @relation(fields: [routine_id], references: [routine_id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model user_accounts {
+  user_id  Int        @id @default(autoincrement())
+  username String
+  email    String     @unique(map: "sqlite_autoindex_user_accounts_1")
+  routines routines[]
+}

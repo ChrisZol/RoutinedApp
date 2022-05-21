@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Zolkin\Documents\Master Studium Informatik\1. Semester\SGSE\Praktikum\routined_app\client\flutter\build\windows\CMakeFiles\13341ac7d12583aa04d634c6c00d74ca\flutter_windows.dll.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\Zolkin\Documents\Master Studium Informatik\1. Semester\SGSE\Praktikum\routined_app\client\flutter\build\windows\CMakeFiles\ff5d436c2718f3da65d89e0b8be27176\flutter_assemble.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\Zolkin\Documents\Master Studium Informatik\1. Semester\SGSE\Praktikum\routined_app\client\flutter\windows\flutter\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\Zolkin\Documents\Master Studium Informatik\1. Semester\SGSE\Praktikum\routined_app\client\flutter\build\windows\flutter\CMakeFiles\flutter_assemble" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{A73B2E25-F048-3946-AB48-6F9A6B7A384C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
