@@ -20,10 +20,10 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: <String, WidgetBuilder>{
-        '/' : (context) => const HomePage(title: 'Routined'),
-        '/routines': (BuildContext context) => const RoutinesOverviewPage(),
-        '/routine':(context) => const RoutinePage(),
-        '/task' : (context) => const TaskPage()
+        '/': (context) => const HomePage(title: 'Routined'),
+        '/routines': (context) => const RoutinesOverviewPage(),
+        '/routine': (context) => const RoutinePage(),
+        '/task': (context) => const TaskPage()
       },
     );
   }

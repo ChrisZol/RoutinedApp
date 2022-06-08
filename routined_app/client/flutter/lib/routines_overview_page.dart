@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'routine_management/routine_data.dart';
@@ -11,42 +12,76 @@ class RoutinesOverviewPage extends StatefulWidget {
 }
 
 class _RoutinesOverviewPageState extends State<RoutinesOverviewPage> {
+  //late List<Routine> routineList;
+
   @override
   void initState() {
     super.initState();
-    fetchRoutines();
   }
 
-  void fetchRoutines() async {
+  void addRoutine() async {
     final response =
-        await http.get(Uri.parse('http://localhost:3000/routines'));
+        await http.post(Uri.parse('http://127.0.0.1:3000/routines'));
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      print(response.body);
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to add routine');
+    }
+  }
+
+  Future<List<Routine>> fetchRoutines() async {
+    final response =
+        await http.get(Uri.parse('http://127.0.0.1:3000/routines'));
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
-      print(response);
+      print(response.body);
+
+      List<dynamic> body = jsonDecode(response.body);
+
+      return body
+          .map(
+            (dynamic item) => Routine.fromJson(item),
+          )
+          .toList();
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
-      throw Exception('Failed to load album');
+      throw Exception('Failed to load routines');
     }
   }
 
-  Widget _buildRoutineList() => ListView.builder(
-        itemCount: 5,
+  void _showNewRoutineForm() {}
+
+  Widget _buildRoutineList(List<Routine> routineList) => ListView.builder(
+        itemCount: routineList.length,
         itemBuilder: (context, index) {
-          return _getListItem(index);
+          return _getListItem(routineList[index]);
         },
       );
 
-  Widget _getListItem(index) => Container(
+  Widget _getListItem(routine) => Container(
         margin: const EdgeInsets.only(top: 5.0),
         child: Card(
-          child: _getListTile(index),
+          child: _getListTile(routine),
         ),
       );
 
-  Widget _getListTile(int index) {
+  Widget _getListTile(routine) {
+    return ListTile(
+      subtitle: Text(routine.startTime.format(context)),
+      title: Text(routine.name),
+      onTap: () => Navigator.pushNamed(context, '/routine',
+          arguments: {'id': routine.id}),
+    );
+  }
+
+  Routine makeRoutine(int index) {
     var rng = Random();
     final taskLength = rng.nextInt(15);
     var tasks = <Task>[];
@@ -59,18 +94,12 @@ class _RoutinesOverviewPageState extends State<RoutinesOverviewPage> {
           duration: rng.nextInt(200)));
     }
 
-    var routineTest = Routine(
+    return Routine(
         id: index,
         name: "Routine ${index + 1}",
         startTime: TimeOfDay(hour: rng.nextInt(24), minute: rng.nextInt(59)),
         endTime: TimeOfDay(hour: rng.nextInt(24), minute: rng.nextInt(59)),
         tasks: tasks);
-    return ListTile(
-      subtitle: Text(routineTest.startTime.format(context)),
-      title: Text(routineTest.name),
-      onTap: () => Navigator.pushNamed(context, '/routine',
-          arguments: {'id': routineTest.id}),
-    );
   }
 
   @override
@@ -79,7 +108,22 @@ class _RoutinesOverviewPageState extends State<RoutinesOverviewPage> {
       appBar: AppBar(
         title: const Text('My Routines'),
       ),
-      body: Center(child: _buildRoutineList()),
+      body: Builder(builder: (context) {
+        return FutureBuilder(
+            future: fetchRoutines(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Center(
+                    child: _buildRoutineList(snapshot.data as List<Routine>));
+              }
+              return const Text('Routine not found');
+            });
+      }),
+      floatingActionButton: FloatingActionButton(
+        onPressed: addRoutine,
+        tooltip: 'Add New Routine',
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }

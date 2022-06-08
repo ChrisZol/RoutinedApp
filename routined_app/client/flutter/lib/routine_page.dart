@@ -15,19 +15,18 @@ class _RoutinePageState extends State<RoutinePage> {
 
   @override
   void initState() {
-    var id = ModalRoute.of(context)?.settings.arguments as int;
     super.initState();
-    futureRoutine = fetchRoutine(id);
   }
 
-  Future<Routine> fetchRoutine(int id) async {
+  Future<Routine> fetchRoutine() async {
+    var id = (ModalRoute.of(context)!.settings.arguments as Map)['id'];
     final response =
-        await http.get(Uri.parse('https://localhost:3000/routine/$id'));
+        await http.get(Uri.parse('http://127.0.0.1:3000/routine/$id'));
 
     if (response.statusCode == 200) {
       return Routine.fromJson(jsonDecode(response.body));
     } else {
-      throw Exception('Failed to load album');
+      throw Exception('Failed to load routine');
     }
   }
 
@@ -65,7 +64,7 @@ class _RoutinePageState extends State<RoutinePage> {
     return Scaffold(
         appBar: AppBar(),
         body: FutureBuilder<Routine>(
-            future: futureRoutine,
+            future: fetchRoutine(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return _buildRoutineView(snapshot.data!);

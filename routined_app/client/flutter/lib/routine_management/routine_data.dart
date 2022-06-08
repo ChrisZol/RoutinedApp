@@ -19,8 +19,8 @@ class Routine {
     return Routine(
       id: json['routine_id'],
       name: json['name'],
-      startTime: json['start_time'],
-      endTime: json['end_time'],
+      startTime: json['start_time'] ?? const TimeOfDay(hour: 0, minute: 0),
+      endTime: json['end_time'] ?? const TimeOfDay(hour: 0, minute: 0),
     );
   }
 }
