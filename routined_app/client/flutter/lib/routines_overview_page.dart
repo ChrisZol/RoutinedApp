@@ -20,8 +20,9 @@ class _RoutinesOverviewPageState extends State<RoutinesOverviewPage> {
   }
 
   void addRoutine() async {
-    final response =
-        await http.post(Uri.parse('http://127.0.0.1:3000/routines'));
+    final response = await http.post(
+        Uri.parse('http://127.0.0.1:3000/routine/11'),
+        body: jsonEncode(makeRoutine(11)));
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.

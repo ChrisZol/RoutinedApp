@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 class Routine {
@@ -23,6 +25,14 @@ class Routine {
       endTime: json['end_time'] ?? const TimeOfDay(hour: 0, minute: 0),
     );
   }
+
+  Map toJson() => {
+        'routine_id': id,
+        'name': name,
+        'start_time': startTime,
+        'end_time': endTime,
+        'tasks': jsonEncode(tasks)
+      };
 }
 
 class Task {
@@ -45,4 +55,11 @@ class Task {
       duration: json['duration'],
     );
   }
+
+  Map toJson() => {
+        'task_id': id,
+        'name': name,
+        'description': description,
+        'duration': duration,
+      };
 }
