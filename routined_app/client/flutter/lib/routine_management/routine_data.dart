@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 class Routine {
   final int id;
   final String name;
+  final String occurence;
   final TimeOfDay startTime;
   final TimeOfDay endTime;
   final List<Task> tasks;
@@ -12,6 +13,7 @@ class Routine {
   const Routine({
     required this.id,
     required this.name,
+    required this.occurence,
     required this.startTime,
     required this.endTime,
     this.tasks = const [],
@@ -21,17 +23,20 @@ class Routine {
     return Routine(
       id: json['routine_id'],
       name: json['name'],
-      startTime: json['start_time'] ?? const TimeOfDay(hour: 0, minute: 0),
-      endTime: json['end_time'] ?? const TimeOfDay(hour: 0, minute: 0),
+      occurence: json['occurence'],
+      startTime: TimeOfDay(hour: json['start_time'], minute: 0),
+      endTime: TimeOfDay(hour: json['end_time'], minute: 0),
     );
   }
 
   Map toJson() => {
         'routine_id': id,
         'name': name,
-        'start_time': startTime,
-        'end_time': endTime,
-        'tasks': jsonEncode(tasks)
+        'occurence': occurence,
+        'start_time': startTime.hour * 60 + startTime.minute,
+        'end_time': endTime.hour * 60 + endTime.minute,
+        'tasks': jsonEncode(tasks),
+        'user_id': 1
       };
 }
 

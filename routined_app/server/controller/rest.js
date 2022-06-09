@@ -67,15 +67,15 @@ export const getTask = async (req, res) => {
 
 export const createRoutine = async (req, res) => {
     try{
-        const {name, startTime, endTime, occurence} = req.body;
+        const {name, occurence, start_time, end_time, user_id} = req.body;
 
         var routine = await prisma.routines.create({
             data: {
-                name,
-                occurence,
-                startTime,
-                endTime,
-                user_id: { connect: {user_id}}
+                name: name,
+                occurence: occurence,
+                start_time: start_time,
+                end_time: end_time,
+                user_id: user_id
             }
         })
 

@@ -8,8 +8,8 @@ CREATE TABLE IF NOT EXISTS routines (
     routine_id INTEGER PRIMARY KEY,
     name TEXT NOT NULL,
     occurence TEXT CHECK(occurence IN('Daily', 'Weekly', 'Monthly', 'Yearly')) NOT NULL,
-    start_time NOT NULL,
-    end_time NOT NULL,
+    start_time INTEGER NOT NULL,
+    end_time INTEGER NOT NULL,
     user_id INTEGER NOT NULL,
     FOREIGN KEY (user_id) REFERENCES user_accounts (user_id)
 );

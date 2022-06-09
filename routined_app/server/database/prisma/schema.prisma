@@ -4,17 +4,17 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = "file:../routined_db.db"
+  url      = env("DATABASE_URL")
 }
 
 model routines {
-  routine_id    Int             @id @default(autoincrement())
+  routine_id    Int           @id @default(autoincrement())
   name          String
   occurence     String
-  start_time    Unsupported("")
-  end_time      Unsupported("")
+  start_time    Int
+  end_time      Int
   user_id       Int
-  user_accounts user_accounts   @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
+  user_accounts user_accounts @relation(fields: [user_id], references: [user_id], onDelete: NoAction, onUpdate: NoAction)
   tasks         tasks[]
 }
 

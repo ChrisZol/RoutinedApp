@@ -20,9 +20,9 @@ class _RoutinesOverviewPageState extends State<RoutinesOverviewPage> {
   }
 
   void addRoutine() async {
-    final response = await http.post(
-        Uri.parse('http://127.0.0.1:3000/routine/11'),
-        body: jsonEncode(makeRoutine(11)));
+    var j = jsonEncode(makeRoutine(11));
+    final response =
+        await http.post(Uri.parse('http://127.0.0.1:3000/routine/11'), body: j);
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
@@ -98,6 +98,7 @@ class _RoutinesOverviewPageState extends State<RoutinesOverviewPage> {
     return Routine(
         id: index,
         name: "Routine ${index + 1}",
+        occurence: 'Daily',
         startTime: TimeOfDay(hour: rng.nextInt(24), minute: rng.nextInt(59)),
         endTime: TimeOfDay(hour: rng.nextInt(24), minute: rng.nextInt(59)),
         tasks: tasks);
