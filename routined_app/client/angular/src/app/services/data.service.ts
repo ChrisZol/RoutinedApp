@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Routine } from '../data/routine';
+import { Task } from '../data/task';
 
 export interface Message {
   fromName: string;
@@ -79,5 +81,21 @@ export class DataService {
 
   public getMessageById(id: number): Message {
     return this.messages[id];
+  }
+
+  public getRoutines(): Routine[] {
+    return null;
+  }
+
+  public getRoutineById(): Routine {
+    return null;
+  }
+  
+  public getTasks(): Task[] {
+    return null;
+  }
+
+  public getTaskById(): Task {
+    return null;
   }
 }
