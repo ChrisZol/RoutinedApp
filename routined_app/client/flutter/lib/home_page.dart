@@ -41,6 +41,7 @@ class _HomePageState extends State<HomePage> {
           var routineTest = Routine(
               id: index,
               name: "Routine ${index + 1}",
+              occurence: 'Daily',
               startTime:
                   TimeOfDay(hour: rng.nextInt(24), minute: rng.nextInt(59)),
               endTime:
