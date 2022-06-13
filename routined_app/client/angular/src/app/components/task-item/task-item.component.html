@@ -1,3 +1,8 @@
-<p>
-  task-item works!
-</p>
+<ion-item *ngIf="task" [routerLink]="'/task/' + task.id" [detail]="false">
+  <ion-label class="ion-text-wrap">
+    <h2>
+      {{ task.name }}
+    </h2>
+    <h3 class="subtitle">{{ task.description }}</h3>
+  </ion-label>
+</ion-item>

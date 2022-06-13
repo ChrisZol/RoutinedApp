@@ -4,11 +4,11 @@ export class Routine {
     id: number;
     name: string;
     occurence: string;
-    startTime: TimeRanges;
-    endTime: TimeRanges;
+    startTime: Date;
+    endTime: Date;
     tasks: Task[];
 
-    constructor(id: number, name: string, occurence: string, startTime: TimeRanges, endTime: TimeRanges) {
+    constructor(id: number, name: string, occurence: string, startTime: Date, endTime: Date) {
         this.id = id;
         this.name = name;
         this.occurence = occurence;

@@ -27,6 +27,12 @@
 | CLI:                                                         | 'ionic generate': Generating new pages, components, ..., with all necessary files, new pages are automatically saved as a new route |
 | During runtime, hot reloads of code changes are supported -> Great developer experience, Time saving, Supports experimental coding (high learning curve) | Automatic hot reload when code changes occur                 |
 | Works with an easy to understand Widget structure            | Works with a component structure                             |
+| Intuitive programming                                        | Big file structure                                           |
+| Code can easily get cluttered because of nested widgets      | Code is seperated and encapsulated -> Good overview in code  |
+|                                                              | It takes more time to get into the framework because the programming is not intuitive |
+| Knowledge in DART is useful                                  | Knowledge in Typescript, HTML, CSS/SASS are useful           |
+| Routing a little complicated (Many ways to do it)            | Routing made easy                                            |
+|                                                              | Using components and pages made easy (with HTML tag)         |
 
 
 

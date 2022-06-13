@@ -26,7 +26,7 @@
             </ion-item>
 
             <!-- My Routine Menu Item -->
-            <ion-item button>
+            <ion-item button [routerLink]="'/routines-overview'">
               <ion-icon slot="start" name="book-outline"></ion-icon>
               <ion-label> My Routines </ion-label>
             </ion-item>
@@ -50,8 +50,8 @@
       </ion-header>
       <ion-content class="ion-padding">
         <ion-list>
-          <h1>Current Day</h1>
-          <app-message *ngFor="let routines of getRoutines()" [message]="routines"></app-message>
+          <h1>{{ getCurrentDay() }}</h1>
+          <app-routine-item *ngFor="let routines of getRoutines()" [routine]="routines"></app-routine-item>
         </ion-list>
       </ion-content>
     </div>

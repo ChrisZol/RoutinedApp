@@ -20,7 +20,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/routines-overview/routines-overview.module').then( m => m.RoutinesOverviewPageModule)
   },
   {
-    path: 'routine',
+    path: 'routine/:id',
     loadChildren: () => import('./pages/routine/routine.module').then( m => m.RoutinePageModule)
   },
   {

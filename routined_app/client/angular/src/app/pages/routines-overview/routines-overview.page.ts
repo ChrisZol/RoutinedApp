@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Routine } from 'src/app/data/routine';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-routines-overview',
@@ -12,4 +14,7 @@ export class RoutinesOverviewPage implements OnInit {
   ngOnInit() {
   }
 
+  getRoutines(): Routine[]{
+    return new DataService().getRoutines();
+  }
 }

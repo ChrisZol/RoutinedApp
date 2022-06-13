@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { DataService, Message } from '../../services/data.service';
+import { Routine } from 'src/app/data/routine';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,11 @@ export class HomePage {
     }, 3000);
   }
 
-  getRoutines(): Message[] {
-    return this.data.getMessages();
+  getCurrentDay(): string{
+    return new Date().toLocaleString('de-DE');
+  }
+
+  getRoutines(): Routine[] {
+    return this.data.getRoutines();
   }
 }

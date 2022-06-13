@@ -1,9 +1,33 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>routine</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <h2>{{ routine.name }}</h2>
+  <ion-grid>
+    <ion-row>
 
+      <!-- Start Time Picker -->
+      <ion-col>
+        <ion-datetime presentation="time" value="{{routine.startTime.toISOString()}}"></ion-datetime>
+      </ion-col>
+
+      <!-- End Time Picker -->
+      <ion-col>
+        <ion-datetime presentation="time" value="{{routine.endTime.toISOString()}}"></ion-datetime>
+      </ion-col>
+
+      <!-- Occurence Selection -->
+      <ion-col>
+        <ion-button (click)="presentPicker()">{{ routine.occurence }}</ion-button>
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row>
+
+      <ion-list>
+
+        <app-task-item *ngFor="let task of getTasks()" [task]="task"></app-task-item>
+
+      </ion-list>
+
+    </ion-row>
+  </ion-grid>
 </ion-content>
