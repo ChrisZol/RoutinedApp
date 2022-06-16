@@ -5,5 +5,17 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-item>
+    <ion-label position="floating">Description</ion-label>
+    <ion-textarea placeholder="Write a description..." value="{{task.description}}"></ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-label>Duration</ion-label>
+    <ion-input type="number" value="{{task.duration}}"></ion-input>
+    <ion-label>Hours</ion-label>
+    <ion-input type="number" value="{{task.duration}}"></ion-input>
+    <ion-label>Minutes</ion-label>
+    <ion-input type="number" value="{{task.duration}}"></ion-input>
+    <ion-label>Seconds</ion-label>
+  </ion-item>
 </ion-content>

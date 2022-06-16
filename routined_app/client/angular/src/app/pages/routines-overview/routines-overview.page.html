@@ -9,7 +9,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   
-  <ion-header collapse="condense">
+  <ion-header>
     <ion-toolbar>
       <ion-title size="large">
         My Routines
@@ -20,4 +20,10 @@
   <ion-list>
     <app-routine-item *ngFor="let routine of getRoutines()" [routine]="routine"></app-routine-item>
   </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

@@ -48,7 +48,7 @@ export class DataService {
     return this.tasks;
   }
 
-  public getTaskById(): Task {
-    return null;
+  public getTaskById(id:number): Task {
+    return this.tasks[id];
   }
 }

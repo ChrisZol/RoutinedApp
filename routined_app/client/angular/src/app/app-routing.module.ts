@@ -24,7 +24,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/routine/routine.module').then( m => m.RoutinePageModule)
   },
   {
-    path: 'task',
+    path: 'task/:id',
     loadChildren: () => import('./pages/task/task.module').then( m => m.TaskPageModule)
   },
 ];
