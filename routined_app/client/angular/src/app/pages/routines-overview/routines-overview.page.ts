@@ -8,13 +8,15 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./routines-overview.page.scss'],
 })
 export class RoutinesOverviewPage implements OnInit {
+  routinesList: Routine[];
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
-  }
-
-  getRoutines(): Routine[]{
-    return new DataService().getRoutines();
+    this.dataService.getRoutines().subscribe({
+      next: routines =>{
+        this.routinesList=routines
+      }
+    })
   }
 }

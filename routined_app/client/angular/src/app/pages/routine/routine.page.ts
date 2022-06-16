@@ -12,15 +12,34 @@ import { Task } from 'src/app/data/task';
 })
 export class RoutinePage implements OnInit {
   routine: Routine;
+  taskList: Task[];
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private pickerController: PickerController
+    private pickerController: PickerController,
+    private dataService: DataService
     ) { }
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
-    this.routine = new DataService().getRoutineById(parseInt(id, 10));
+    console.log(id);
+    this.dataService.getRoutineById(parseInt(id, 10))
+      .subscribe({
+        next: r => {
+          console.log(r);
+          this.routine = r;
+          console.log(this.routine);
+        }
+      });
+      this.dataService.getTasks(parseInt(id, 10))
+        .subscribe({
+          next: tasks => {
+          this.taskList = tasks;
+          console.log(tasks);
+        }});
+      console.log(this.routine);
+
+    
   }
 
   async presentPicker() {
@@ -46,9 +65,5 @@ export class RoutinePage implements OnInit {
       ]
     });
     await picker.present();
-  }
-
-  getTasks(): Task[]{
-    return new DataService().getTasks();
   }
 }

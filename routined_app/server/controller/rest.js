@@ -45,6 +45,24 @@ export const getRoutine = async (req, res) => {
     }
 }
 
+export const getTasksOfRoutine = async (req, res) => {
+    try{
+        var id = req.params.id;
+
+        var routine = await prisma.tasks.findMany({
+            where: {
+                routine_id: Number(id)
+            }
+        })
+
+        res.send(routine);
+    }
+    catch(err){
+        res.status(500);
+        console.log(err);
+    }
+}
+
 export const getTask = async (req, res) => {
     try{
         var id = req.params.id;

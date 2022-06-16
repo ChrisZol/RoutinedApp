@@ -3,7 +3,7 @@
   <ion-content class="ion-padding">
     <ion-list>
       <h1>{{ getCurrentDay() }}</h1>
-      <app-routine-item *ngFor="let routines of getRoutines()" [routine]="routines"></app-routine-item>
+      <app-routine-item *ngFor="let routines of routinesList" [routine]="routines"></app-routine-item>
     </ion-list>
   </ion-content>
 </div>

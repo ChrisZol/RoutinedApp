@@ -11,11 +11,19 @@ import { DataService } from 'src/app/services/data.service';
 export class TaskPage implements OnInit {
   task: Task;
 
-  constructor(private activatedRoute:ActivatedRoute) { }
+  constructor(
+    private activatedRoute:ActivatedRoute,
+    private dataService: DataService
+    ) { }
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
-    this.task = new DataService().getTaskById(parseInt(id, 10));
+    this.dataService.getTaskById(parseInt(id, 10))
+                    .subscribe({
+                      next: _task => {
+                        this.task = _task;
+                      }
+                    });
   }
 
 }

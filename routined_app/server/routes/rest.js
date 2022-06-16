@@ -1,21 +1,20 @@
 import express from 'express';
 import * as posts  from '../controller/rest.js';
 
-var app = express();
-app.use(express.json())
-
+var router = express.Router();
 // GET Requests
-app.get('/', posts.getRoutinesOfDay);
-app.get('/routines', posts.getRoutines);
-app.get('/routine/:id', posts.getRoutine);
-app.get('/task/:id', posts.getTask);
+router.get('/', posts.getRoutinesOfDay);
+router.get('/routines', posts.getRoutines);
+router.get('/routine/:id', posts.getRoutine);
+router.get('/routine/:id/tasks', posts.getTasksOfRoutine);
+router.get('/task/:id', posts.getTask);
 
 // POST Requests
-app.post('/routine/:id', posts.createRoutine);
-app.post('/task/:id', posts.createTask);
+router.post('/routine/:id', posts.createRoutine);
+router.post('/task/:id', posts.createTask);
 
 // PATCH Requests
-app.patch('/routine/:id', posts.updateRoutine)
-app.patch('/task/:id', posts.updateTask);
+router.patch('/routine/:id', posts.updateRoutine)
+router.patch('/task/:id', posts.updateTask);
 
-export default app;
+export default router;

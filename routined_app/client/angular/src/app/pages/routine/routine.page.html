@@ -1,23 +1,23 @@
 <app-app-frame></app-app-frame>
 
 <ion-content>
-  <h2>{{ routine.name }}</h2>
+  <h2 *ngIf="routine">{{ routine.name }}</h2>
   <ion-grid>
     <ion-row>
 
       <!-- Start Time Picker -->
       <ion-col>
-        <ion-datetime presentation="time" value="{{routine.startTime.toISOString()}}"></ion-datetime>
+        <ion-datetime presentation="time"></ion-datetime>
       </ion-col>
 
       <!-- End Time Picker -->
       <ion-col>
-        <ion-datetime presentation="time" value="{{routine.endTime.toISOString()}}"></ion-datetime>
+        <ion-datetime presentation="time"></ion-datetime>
       </ion-col>
 
       <!-- Occurence Selection -->
       <ion-col>
-        <ion-button (click)="presentPicker()">{{ routine.occurence }}</ion-button>
+        <ion-button *ngIf="routine" (click)="presentPicker()">{{ routine.occurence }}</ion-button>
       </ion-col>
 
     </ion-row>
@@ -26,7 +26,7 @@
 
   <!-- Task List -->
   <ion-list>
-    <app-task-item *ngFor="let task of getTasks()" [task]="task"></app-task-item>
+    <app-task-item *ngFor="let task of taskList" [task]="task"></app-task-item>
     <ion-fab  vertical="bottom" horizontal="end" slot="fixed">
       <ion-fab-button>
         <ion-icon name="add"></ion-icon>

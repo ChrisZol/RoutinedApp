@@ -1,54 +1,33 @@
-import { Injectable } from '@angular/core';
 import { Routine } from '../data/routine';
 import { Task } from '../data/task';
 
-export interface Message {
-  fromName: string;
-  subject: string;
-  date: string;
-  id: number;
-  read: boolean;
-}
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+
+import { map } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class DataService {
-  public routines: Routine[] = [
-    {
-      id: 0,
-      name: 'Routine1',
-      occurence: 'Daily',
-      startTime: new Date(2022, 6),
-      endTime: new Date(2020, 7),
-      tasks: []
-    }
-  ];
 
-  public tasks: Task[] = [
-    {
-      id: 0,
-      name: 'Task1',
-      duration: 1000,
-      description: 'Desc'
-    }
-  ];
+  constructor(private httpClient: HttpClient) { }
 
-  constructor() { }
-
-  public getRoutines(): Routine[] {
-    return this.routines;
+  public getRoutines(): Observable<Routine[]> {
+    return this.httpClient.get<Routine []>('http://127.0.0.1:3000/routines');
   }
 
-  public getRoutineById(id: number): Routine {
-    return this.routines[id];
+  public getRoutineById(id: number): Observable<Routine> {
+    return this.httpClient.get<Routine>('http://127.0.0.1:3000/routine/' + id);
   }
   
-  public getTasks(): Task[] {
-    return this.tasks;
+  public getTasks(id: number): Observable<Task[]> {
+    return this.httpClient.get<Task[]>("http://127.0.0.1:3000/routine/" + id +"/tasks");
   }
 
-  public getTaskById(id:number): Task {
-    return this.tasks[id];
+  public getTaskById(id:number): Observable<Task> {
+    return this.httpClient.get<Task>('http://127.0.0.1:3000/task/' + id);
   }
 }

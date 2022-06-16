@@ -1,18 +1,18 @@
 import {Task} from './task';
 
 export class Routine {
-    id: number;
+    routine_id: number;
     name: string;
     occurence: string;
-    startTime: Date;
-    endTime: Date;
+    start_time: Date;
+    end_time: Date;
     tasks: Task[];
 
     constructor(id: number, name: string, occurence: string, startTime: Date, endTime: Date) {
-        this.id = id;
+        this.routine_id = id;
         this.name = name;
         this.occurence = occurence;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.start_time = startTime;
+        this.end_time = endTime;
     }
 }

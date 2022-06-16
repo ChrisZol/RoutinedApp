@@ -16,8 +16,8 @@ export class RoutineItemComponent implements OnInit {
 
   ngOnInit() 
   {
-    this.startTimeStr = formatDate(this.routine.startTime, 'hh:mm', 'en-US');
-    this.endTimeStr = formatDate(this.routine.endTime, 'hh:mm', 'en-US');
+    this.startTimeStr = formatDate(this.routine.start_time, 'hh:mm', 'en-US');
+    this.endTimeStr = formatDate(this.routine.end_time, 'hh:mm', 'en-US');
   }
 
 }

@@ -14,7 +14,7 @@
   </ion-header>
   
   <ion-list>
-    <app-routine-item *ngFor="let routine of getRoutines()" [routine]="routine"></app-routine-item>
+    <app-routine-item *ngFor="let routine of routinesList" [routine]="routine"></app-routine-item>
   </ion-list>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">

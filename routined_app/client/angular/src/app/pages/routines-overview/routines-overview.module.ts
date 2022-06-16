@@ -10,6 +10,8 @@ import { RoutinesOverviewPage } from './routines-overview.page';
 import { RoutineComponentModule } from 'src/app/components/routine-item/routine.module';
 import { AppFrameComponentModule } from 'src/app/components/app-frame/app-frame.module';
 
+import { HttpClientModule } from '@angular/common/http'
+
 @NgModule({
   imports: [
     CommonModule,
@@ -17,7 +19,8 @@ import { AppFrameComponentModule } from 'src/app/components/app-frame/app-frame.
     IonicModule,
     AppFrameComponentModule,
     RoutineComponentModule,
-    RoutinesOverviewPageRoutingModule
+    RoutinesOverviewPageRoutingModule,
+    HttpClientModule
   ],
   declarations: [RoutinesOverviewPage]
 })

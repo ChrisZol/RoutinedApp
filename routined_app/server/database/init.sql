@@ -22,9 +22,3 @@ CREATE TABLE IF NOT EXISTS tasks (
     routine_id INTEGER NOT NULL,
     FOREIGN KEY (routine_id) REFERENCES routines (routine_id)
 );
-
-INSERT INTO user_accounts (username, email)
-VALUES('Chris', 'test@mail.com');
-
-INSERT INTO routines (name, occurence, start_time, end_time, user_id)
-VALUES ('TestRoutine', 'Weekly', 12, 14, 1);

@@ -1,18 +1,16 @@
-import app from './routes/rest.js';
-import * as db from './database/db.js';
+import express from 'express';
 import cors from 'cors';
 
-//db.connectDB();
-//db.initDB();
+import routes from './routes/rest.js';
 
-app.use(cors());
-app.all('*', function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    next();
- });
+var app = express();
+app.use(express.json())
+app.use(cors({origin: 'http://localhost:8100'}));
+app.use('/', routes);
 
 // Starting the server
 app.listen(3000, () => {
     console.log("Server started");
 });
+
+export default app;

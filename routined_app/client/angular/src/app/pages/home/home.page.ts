@@ -8,7 +8,17 @@ import { DataService } from '../../services/data.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  constructor(private data: DataService) {}
+  routinesList: Routine[];
+
+  constructor(private dataService: DataService) {}
+
+  ngOnInit() {
+    this.dataService.getRoutines().subscribe({
+      next: routines =>{
+        this.routinesList=routines
+      }
+    })
+  }
 
   refresh(ev) {
     setTimeout(() => {
@@ -18,9 +28,5 @@ export class HomePage {
 
   getCurrentDay(): string{
     return new Date().toLocaleString('de-DE');
-  }
-
-  getRoutines(): Routine[] {
-    return this.data.getRoutines();
   }
 }
