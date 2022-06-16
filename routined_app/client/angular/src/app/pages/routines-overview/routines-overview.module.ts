@@ -8,12 +8,14 @@ import { RoutinesOverviewPageRoutingModule } from './routines-overview-routing.m
 
 import { RoutinesOverviewPage } from './routines-overview.page';
 import { RoutineComponentModule } from 'src/app/components/routine-item/routine.module';
+import { AppFrameComponentModule } from 'src/app/components/app-frame/app-frame.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    AppFrameComponentModule,
     RoutineComponentModule,
     RoutinesOverviewPageRoutingModule
   ],

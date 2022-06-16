@@ -1,10 +1,19 @@
+<app-app-frame></app-app-frame>
+
+<ion-content>
+  
+<ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+  <ion-refresher-content></ion-refresher-content>
+</ion-refresher>
+
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{task.name}}</ion-title>
+    <ion-title size="large">
+      {{task.name}}
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
   <ion-item>
     <ion-label position="floating">Description</ion-label>
     <ion-textarea placeholder="Write a description..." value="{{task.description}}"></ion-textarea>
