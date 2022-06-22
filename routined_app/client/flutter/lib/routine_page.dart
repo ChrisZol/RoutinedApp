@@ -1,7 +1,7 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:routined_app/routine_management/routine_data.dart';
-import 'package:http/http.dart' as http;
+import 'package:routined_app/data/routine_data.dart';
+
+import 'data/data_service.dart';
 
 class RoutinePage extends StatefulWidget {
   const RoutinePage({Key? key}) : super(key: key);
@@ -16,18 +16,6 @@ class _RoutinePageState extends State<RoutinePage> {
   @override
   void initState() {
     super.initState();
-  }
-
-  Future<Routine> fetchRoutine() async {
-    var id = (ModalRoute.of(context)!.settings.arguments as Map)['id'];
-    final response =
-        await http.get(Uri.parse('http://127.0.0.1:3000/routine/$id'));
-
-    if (response.statusCode == 200) {
-      return Routine.fromJson(jsonDecode(response.body));
-    } else {
-      throw Exception('Failed to load routine');
-    }
   }
 
   Widget _buildRoutineView(Routine routine) => Container(
@@ -64,7 +52,8 @@ class _RoutinePageState extends State<RoutinePage> {
     return Scaffold(
         appBar: AppBar(),
         body: FutureBuilder<Routine>(
-            future: fetchRoutine(),
+            future: getRoutine(
+                (ModalRoute.of(context)!.settings.arguments as Map)['id']),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return _buildRoutineView(snapshot.data!);

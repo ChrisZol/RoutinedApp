@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:routined_app/routine_management/routine_data.dart';
+import 'package:routined_app/data/routine_data.dart';
 import 'package:http/http.dart' as http;
 
 class TaskPage extends StatefulWidget {

@@ -1,7 +1,8 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'routine_management/routine_data.dart';
+import 'data/data_service.dart';
+import 'data/routine_data.dart';
 import 'package:http/http.dart' as http;
 
 class RoutinesOverviewPage extends StatefulWidget {
@@ -31,29 +32,6 @@ class _RoutinesOverviewPageState extends State<RoutinesOverviewPage> {
       // If the server did not return a 200 OK response,
       // then throw an exception.
       throw Exception('Failed to add routine');
-    }
-  }
-
-  Future<List<Routine>> fetchRoutines() async {
-    final response =
-        await http.get(Uri.parse('http://127.0.0.1:3000/routines'));
-
-    if (response.statusCode == 200) {
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
-      print(response.body);
-
-      List<dynamic> body = jsonDecode(response.body);
-
-      return body
-          .map(
-            (dynamic item) => Routine.fromJson(item),
-          )
-          .toList();
-    } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
-      throw Exception('Failed to load routines');
     }
   }
 
@@ -112,7 +90,7 @@ class _RoutinesOverviewPageState extends State<RoutinesOverviewPage> {
       ),
       body: Builder(builder: (context) {
         return FutureBuilder(
-            future: fetchRoutines(),
+            future: getRoutines(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return Center(
